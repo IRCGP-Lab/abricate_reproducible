@@ -9,6 +9,24 @@ It comes bundled with multiple databases:
 NCBI, CARD, ARG-ANNOT, Resfinder, MEGARES, EcOH, PlasmidFinder, Ecoli_VF and
 VFDB.
 
+## ABRicate-reproducible
+ABRicate is a wrapper and a summary tool for Blastn runs against various antimicrobial resistance databases.
+This forked edit of ABRicate fixes the problem of getting different antimicrobial results even though two databases have identical entries.
+The original version had an [issue](https://github.com/tseemann/abricate/issues/1#issue-109942830) where not all genes that possess similar sequences are reported.
+
+To fix this problem, the `--culling-limit` option is changed from 1 to 999 in the blastn call. 
+This allows multiple hits for a single read, meaning that no matter how many similar sequences there are in a database, the program now reports all sequences as hits.
+In addition, the `-no_greedy` flag was added in the blastn call. 
+This would prioritize the hits with higher sequence identity to be reported, and does not stop when certain number of hits are reached.
+
+For a comparison, let's look at a toy example that reflects the problem and the solution.
+
+E.g. for two similar sequences TEM1 and TEM45, the blastn call would only report TEM1, only because the sequence comes earlier order-wise in the database.
+With the `-culling-limit=1` option from the original abricate function, Blastn call would terminate after finding TEM1.
+The current version however, uses the `-culling-limit=999` option, which is the maximum number for the option. 
+With the additional `-no_greedy` option, the algorithm now searches for the *best* 999 hits. 
+Meaning that unless there are more than 999 similar sequences in the database, all sequences will be reported.
+
 ## Is this the right tool for me?
 
 1. It only supports contigs, not FASTQ reads
