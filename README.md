@@ -9,7 +9,7 @@ It comes bundled with multiple databases:
 NCBI, CARD, ARG-ANNOT, Resfinder, MEGARES, EcOH, PlasmidFinder, Ecoli_VF and
 VFDB.
 
-## ABRicate-reproducible
+## Editors note: ABRicate-reproducible
 ABRicate is a wrapper and a summary tool for Blastn runs against various antimicrobial resistance databases.
 This forked edit of ABRicate fixes the problem of getting different antimicrobial results even though two databases have identical entries.
 The original version had an [issue](https://github.com/tseemann/abricate/issues/1#issue-109942830) where not all genes that possess similar sequences are reported.
