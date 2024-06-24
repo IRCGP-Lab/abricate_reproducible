@@ -9,7 +9,7 @@ It comes bundled with multiple databases:
 NCBI, CARD, ARG-ANNOT, Resfinder, MEGARES, EcOH, PlasmidFinder, Ecoli_VF and
 VFDB.
 
-## ABRicate-reproducible
+## Editors note: ABRicate-reproducible
 ABRicate is a wrapper and a summary tool for Blastn runs against various antimicrobial resistance databases.
 This forked edit of ABRicate fixes the problem of getting different antimicrobial results even though two databases have identical entries.
 The original version had an [issue](https://github.com/tseemann/abricate/issues/1#issue-109942830) where not all genes that possess similar sequences are reported.
@@ -23,9 +23,11 @@ For a comparison, let's look at a toy example that reflects the problem and the 
 
 E.g. for two similar sequences TEM1 and TEM45, the blastn call would only report TEM1, only because the sequence comes earlier order-wise in the database.
 With the `-culling-limit=1` option from the original abricate function, Blastn call would terminate after finding TEM1.
+
 The current version however, uses the `-culling-limit=999` option, which is the maximum number for the option. 
 With the additional `-no_greedy` option, the algorithm now searches for the *best* 999 hits. 
-Meaning that unless there are more than 999 similar sequences in the database, all sequences will be reported.
+Meaning that unless there are more than 999 similar sequences in the database, all sequences will be reported,
+and even if it does have 999 similar sequences, the best 999 hits will be reported, so that the results are very similar across databases.
 
 ## Is this the right tool for me?
 
