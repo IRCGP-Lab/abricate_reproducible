@@ -123,7 +123,7 @@ for my $file (@ARGV) {
 
   my $cmd = "(any2fasta -q -u \Q$file\E |"
           . " $blastcmd -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
-          . " -evalue 10 -culling_limit $CULL -no_greedy"
+          . " -evalue 1E-20 -culling_limit $CULL -no_greedy"
           . " -max_target_seqs 30000"  # https://github.com/tseemann/abricate/issues/135
 #          . " -max_target_seqs ".$dbinfo->{SEQUENCES}   # Issue #76
           . ")"
