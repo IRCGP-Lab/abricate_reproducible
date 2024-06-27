@@ -35,7 +35,7 @@ my $FIELD = '%COVERAGE';
 my $FIELDSEP = ';';
 my $IDSEP = '~~~';
 
-my $CULL = 999;   # BLAST -culling_limit
+my $CULL = 99999;   # BLAST -culling_limit
 
 my @BLAST_FIELDS = qw(
   qseqid qstart qend qlen
