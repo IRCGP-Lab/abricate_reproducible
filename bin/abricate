@@ -123,8 +123,8 @@ for my $file (@ARGV) {
 
   my $cmd = "(any2fasta -q -u \Q$file\E |"
           . " $blastcmd -db \Q$db_path\E -outfmt '$format' -num_threads $threads"
-          . " -evalue 1E-1 -culling_limit $CULL" # -no_greedy"
-          . " -max_target_seqs 30000"  # https://github.com/tseemann/abricate/issues/135
+          . " -evalue 1E-20 -culling_limit $CULL" # -no_greedy"
+          . " -max_target_seqs 10000"  # https://github.com/tseemann/abricate/issues/135
 #          . " -max_target_seqs ".$dbinfo->{SEQUENCES}   # Issue #76
           . ")"
           ;
@@ -141,7 +141,7 @@ for my $file (@ARGV) {
     my %hit = (map { $BLAST_FIELDS[$_] => $x[$_] } 0 .. @BLAST_FIELDS-1); 
     ($hit{sstart}, $hit{send}) = ($hit{send}, $hit{sstart}) if $hit{sstrand} eq 'minus';
 
-    next if $seen{ join('~', @hit{qw(qseqid qstart qend)}) }++;
+    # next if $seen{ join('~', @hit{qw(qseqid qstart qend)}) }++;
     
     my $pccov = 100 * ($hit{length}-$hit{gaps}) / $hit{slen};
     next unless $pccov >= $mincov;
