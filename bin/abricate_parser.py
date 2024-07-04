@@ -83,7 +83,9 @@ class AbricateEntry:
             for line in abr:
                 if not line.startswith("#"):
                     contig_id = line.split(delimiter)[1]
-                    contig_wise[contig_id].append(AbricateEntry(line))
+                    strand = line.split(delimiter)[4]
+                    id_strand = contig_id + strand
+                    contig_wise[id_strand].append(AbricateEntry(line))
                 else:
                     header = line
         result_report = []
