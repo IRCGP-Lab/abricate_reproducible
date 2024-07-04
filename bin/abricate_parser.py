@@ -52,6 +52,9 @@ class AbricateEntry:
             elif start <= entry.end <= end:
                 if entry.start < start:
                     start = entry.start
+            elif (start >= entry.start) and (end <= entry.end):
+                start = entry.start
+                end = entry.end
             else:
                 if bubble_group:
                     interval_bubbles.append(bubble_group)
