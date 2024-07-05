@@ -46,10 +46,10 @@ class AbricateEntry:
         interval_bubbles = []
         bubble_group = []
         for entry in sorted_entries:
-            if start <= entry.start <= end:
+            if start <= entry.start < end:
                 if entry.end > end:
                     end = entry.end
-            elif start <= entry.end <= end:
+            elif start < entry.end <= end:
                 if entry.start < start:
                     start = entry.start
             elif (start >= entry.start) and (end <= entry.end):
