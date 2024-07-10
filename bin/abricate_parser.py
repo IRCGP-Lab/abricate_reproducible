@@ -102,6 +102,7 @@ def main():
 
     parser.add_argument('input', type=str, help='raw abricate result')
     parser.add_argument('output', type=str, help='processed file')
+    parser.add_argument('delimiter', type=str, default=",", help='delimiter')
 
     args = parser.parse_args()
 
