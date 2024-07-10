@@ -106,7 +106,7 @@ def main():
 
     args = parser.parse_args()
 
-    AbricateEntry.summarize(results=args.input, output=args.output)
+    AbricateEntry.summarize(results=args.input, output=args.output, delimiter=args.delimiter)
 
 
 if __name__ == '__main__':
