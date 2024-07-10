@@ -85,7 +85,7 @@ class AbricateEntry:
                     contig_id = line.split(delimiter)[1]
                     strand = line.split(delimiter)[4]
                     id_strand = contig_id + strand
-                    contig_wise[id_strand].append(AbricateEntry(line))
+                    contig_wise[id_strand].append(AbricateEntry(line, delimiter=delimiter))
                 else:
                     header = line
         result_report = []
