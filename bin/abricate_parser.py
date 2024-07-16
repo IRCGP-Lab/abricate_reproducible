@@ -33,13 +33,13 @@ class AbricateEntry:
     # def __lt__(self, other):
     #     return self.start < other.start
     #
-    # def __eq__(self, other):
-    #     if not isinstance(other, self.__class__):
-    #         return False
-    #     return (self.start == other.start) and (self.end == other.end) and (self.contig == other.contig)
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return (self.start == other.start) and (self.end == other.end) and (self.contig == other.contig)
 
     @classmethod
-    def _group_reads(cls, entries: List['abricate_entry']):
+    def _group_reads_old(cls, entries: List['abricate_entry']):
         sorted_entries = sorted(entries, key=lambda x: x.start)
         start = -1
         end = -1
@@ -66,6 +66,23 @@ class AbricateEntry:
             interval_bubbles.append(bubble_group)
         results = []
         for bubble in interval_bubbles:
+            sorted_bubble = sorted(bubble, key=lambda x: x.score, reverse=True)
+            best_score = sorted_bubble[0].score
+            for entry in sorted_bubble:
+                if entry.score == best_score:
+                    results.append(entry)
+                elif entry.score > best_score:
+                    raise ArithmeticError
+        return results
+
+    @classmethod
+    def _group_reads(cls, entries: List['abricate_entry']):
+        bubble_group = defaultdict(list)
+        for entry in entries:
+            start_end_tuple = str(entry.start) + str(entry.end)
+            bubble_group[start_end_tuple].append(entry)
+        results = []
+        for _, bubble in bubble_group.items():
             sorted_bubble = sorted(bubble, key=lambda x: x.score, reverse=True)
             best_score = sorted_bubble[0].score
             for entry in sorted_bubble:
