@@ -246,7 +246,7 @@ sub get_tag {
 sub get_ncbi {
   my $AFP = "https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest";
   #my $src = "https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/data/latest/AMR_CDS";
-  my $src = "$AFP/AMR_CDS";
+  my $src = "$AFP/AMR_CDS.fa";
   my $name = "amr_cds.ffn";
   #my $src2 = "https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/data/latest/ReferenceGeneCatalog.txt";
   my $src2 = "$AFP/ReferenceGeneCatalog.txt";
